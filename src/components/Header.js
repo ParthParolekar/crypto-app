@@ -10,6 +10,7 @@ import {
   ThemeProvider
 } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
+import { CryptoState } from "../context/CryptoContext";
 
 export default function Header() {
   const useStyles = makeStyles(() => ({
@@ -35,6 +36,8 @@ export default function Header() {
     }
   });
 
+  const { currency, setCurrency } = CryptoState();
+
   return (
     <ThemeProvider theme={darkTheme}>
       <AppBar color="transparent" position="static">
@@ -48,12 +51,14 @@ export default function Header() {
               Crypto App
             </Typography>
             <Select
+              value={currency}
               variant="outlined"
               style={{
                 height: 40,
                 width: 100,
                 marginLeft: 15
               }}
+              onChange={(e) => setCurrency(e.target.value)}
             >
               <MenuItem value={"USD"}>USD</MenuItem>
               <MenuItem value={"INR"}>INR</MenuItem>
